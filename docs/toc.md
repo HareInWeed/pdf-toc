@@ -2,7 +2,7 @@
 
 ToC file consists of entries and commands. Each entry and commands occupies exactly one line in toc file. Each entry represents a bookmark. Commands, on the other hands, control how ToC file is interpreted and how bookmarks are generated.
 
-There is an example in [Lorem Ipsum_toc.txt](/tests/test_files/Lorem%20Ipsum_toc.txt)
+There is an example in [Lorem Ipsum_toc.txt](/tests/data/Lorem%20Ipsum_toc.txt)
 
 ## Entry
 

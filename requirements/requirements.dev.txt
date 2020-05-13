@@ -1,5 +1,10 @@
 -r ./requirements.txt
 
 mypy
-pytest
+autopep8
+
 tox
+
+pytest
+pytest-datadir
+pytest-console-scripts

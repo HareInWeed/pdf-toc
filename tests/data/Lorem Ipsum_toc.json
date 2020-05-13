@@ -1,4 +1,4 @@
-﻿[
+[
     [1, "Lorem Ipsum", 1, {"kind": 1, "xref": 0, "page": 0, "to": {"__type__": "Point", "x": 233.0, "y": 389.0}, "zoom": 0.0}],
     [2, "Preface", 2, {"kind": 1, "xref": 0, "page": 1, "to": {"__type__": "Point", "x": 90.0, "y": 89.0}, "zoom": 0.0}],
     [2, "Chapter 1 – Lorem ipsum dolor sit amet.", 4, {"kind": 1, "xref": 0, "page": 3, "to": {"__type__": "Point", "x": 90.0, "y": 105.0}, "zoom": 0.0}],

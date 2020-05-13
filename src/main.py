@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
+__VERSION__ = "1.0.0"
+
 import re
 import fitz
 import argparse
 import sys
+import json
 from pathlib import Path
 from typing import *
 from typing import Pattern, Match, Callable
-import json
 
 parserT = Dict[Union[Pattern, str], Callable[..., Any]]
 
@@ -105,7 +107,7 @@ class TocParser(Parser):
         return [1 + len(indent) // self.indent, title, page + self.offset, 0]
 
 
-if __name__ == "__main__":
+def main():
     argsParser = argparse.ArgumentParser(description='pdf ToC modifier.')
     argsParser.add_argument('source',
                             help='source pdf file directory')
@@ -119,6 +121,8 @@ if __name__ == "__main__":
                             help='overwrite dist file if it exist')
     argsParser.add_argument('-m', '--modify', action='store_true', dest='mod',
                             help='modified the original file instead of create a new one')
+    argsParser.add_argument('--version', action='version',
+                            version=f"%(prog)s {__VERSION__}")
     args = argsParser.parse_args()
 
     # parse source path
@@ -171,15 +175,22 @@ if __name__ == "__main__":
 
     # source = fitz.open()
     parser = TocParser()
-    toc = []
     with tocPath.open('r', encoding='UTF-8') as file:
-        l: str
-        for l in file:
-            term = parser(str(l))
-            if term is not None:
-                toc.append(term)
+        if tocPath.suffix == ".json":
+            toc = json.loads(file.read(), object_hook=TocJsonHook, encoding="utf-8")
+        else:
+            toc = []
+            l: str
+            for l in file:
+                term = parser(str(l))
+                if term is not None:
+                    toc.append(term)
     source.setToC(toc)
     if args.mod:
         source.saveIncr()
     else:
         source.save(str(destPath))
+
+
+if __name__ == "__main__":
+    main()
