@@ -65,10 +65,20 @@ The indent of every entries will determine the level of the bookmark. You can us
 
 For example, after this command
 
-```
+```plaintext
 >>>> indent = 2
 ```
 
 the indent will be 2.
 
 Note every command only affects subsequent entries. So if there are entries before it, the indent will remain at 4.
+
+## Comments
+
+Comment is a command as well. You can use
+
+```plaintext
+>>>> # This is a comment, it does nothing
+```
+
+to add comments.
