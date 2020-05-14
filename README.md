@@ -6,17 +6,16 @@ a CLI tool to easily extract / edit ToC(Table of Content, or bookmark) of pdf fi
 
 ## Requirements
 
-- python 3
+- python 3.2+
 - PyMuPDF
 
 ## Installation
 
-<!-- not published yet -->
-<!-- install from pypi
+install from pypi
 
 ```sh
 pip install pdf-toc
-``` -->
+```
 
 install from the repo directly
 
@@ -24,11 +23,18 @@ install from the repo directly
 pip install git+https://github.com/HareInWeed/pdf-toc.git@master#egg=pdf-toc
 ```
 
+install a specific version
+
+```bash
+pip install git+https://github.com/HareInWeed/pdf-toc.git@v1.1.0#egg=pdf-toc
+```
+
 ## Usage
 
 ```plaintext
-usage: pdf-toc.py [-h] [--show-toc {json,toc}] [-t TOC] [-d DEST] [-f] [-m]
-                  source
+usage: pdf-toc [-h] [--version] [--show-toc {json,toc}] [-t TOC] [-d DEST]
+               [-T {json,toc}] [-f] [-m]
+               source
 
 pdf ToC modifier.
 
@@ -37,10 +43,15 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
+  --version             show program's version number and exit
   --show-toc {json,toc}
                         print the toc info of the source file and exit
-  -t TOC, --toc TOC     toc info used to embed in the result file
+  -t TOC, --toc TOC     toc info used to embed in the result file. leave it
+                        empty to read toc from stdin
   -d DEST, --dest DEST  destination directory for result file
+  -T {json,toc}, --type {json,toc}
+                        specify format of ToC file. leave it empty to let the
+                        tool determine the format, (from file suffix)
   -f, --force           overwrite dist file if it exist
   -m, --modify          modified the original file instead of create a new one
 ```

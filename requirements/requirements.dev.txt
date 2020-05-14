@@ -8,3 +8,5 @@ tox
 pytest
 pytest-datadir
 pytest-console-scripts
+
+twine
