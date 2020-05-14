@@ -16,7 +16,13 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     install_requires=requirements,
-    url="",
+    author_email="zjnvv@163.com",
+    url="https://github.com/HareInWeed/pdf-toc",
+    project_urls={
+        "Bug Tracker": "https://github.com/HareInWeed/pdf-toc/issues",
+        "Documentation": "https://github.com/HareInWeed/pdf-toc",
+        "Source Code": "https://github.com/HareInWeed/pdf-toc",
+    },
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
