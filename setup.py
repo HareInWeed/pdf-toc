@@ -1,4 +1,5 @@
 import setuptools
+from src import __VERSION__
 
 with open("README.md", "r", encoding='UTF-8') as fh:
     long_description = fh.read()
@@ -9,7 +10,7 @@ requirements = [
 
 setuptools.setup(
     name="pdf-toc",
-    version="1.0.0",
+    version=__VERSION__,
     author="HareInWeed",
     description="a pdf ToC CLI tool",
     long_description=long_description,
@@ -30,5 +31,5 @@ setuptools.setup(
         ],
     },
     zip_safe=False,
-    python_requires=">=3",
+    python_requires=">=3.2",
 )

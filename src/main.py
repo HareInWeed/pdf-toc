@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 
-__VERSION__ = "1.0.0"
+__VERSION__ = "1.1.0"
 
 import re
 import fitz
 import argparse
 import sys
 import json
+from contextlib import contextmanager
 from pathlib import Path
+from textwrap import dedent
 from typing import *
 from typing import Pattern, Match, Callable
 
@@ -74,6 +76,19 @@ class Parser(object):
     __call__ = parse
 
 
+@contextmanager
+def readToc(path: Optional[str]):
+    if path is None:
+        tocFile = sys.stdin
+    else:
+        tocFile = Path(path).open('r', encoding='UTF-8')
+    try:
+        yield tocFile
+    finally:
+        if path is not None:
+            tocFile.close()
+
+
 class TocParser(Parser):
 
     def __init__(self):
@@ -107,22 +122,34 @@ class TocParser(Parser):
         return [1 + len(indent) // self.indent, title, page + self.offset, 0]
 
 
+formatList = ['json', 'toc']
+
+
 def main():
     argsParser = argparse.ArgumentParser(description='pdf ToC modifier.')
+    argsParser.add_argument('--version', action='version',
+                            version=f"%(prog)s {__VERSION__}")
     argsParser.add_argument('source',
                             help='source pdf file directory')
-    argsParser.add_argument('--show-toc', choices=['json', 'toc'], dest='show',
+    argsParser.add_argument('--show-toc', choices=formatList, dest='show',
                             help='print the toc info of the source file and exit')
     argsParser.add_argument('-t', '--toc',
-                            help='toc info used to embed in the result file')
+                            help=dedent('''\
+                                toc info used to embed in the result file.
+                                leave it empty to read toc from stdin
+                            '''))
     argsParser.add_argument('-d', '--dest',
                             help='destination directory for result file')
+    argsParser.add_argument('-T', '--type', choices=formatList,
+                            help=dedent('''\
+                                specify format of ToC file.
+                                leave it empty to let the tool determine the format,
+                                (from file suffix)
+                            '''))
     argsParser.add_argument('-f', '--force', action='store_true',
                             help='overwrite dist file if it exist')
     argsParser.add_argument('-m', '--modify', action='store_true', dest='mod',
                             help='modified the original file instead of create a new one')
-    argsParser.add_argument('--version', action='version',
-                            version=f"%(prog)s {__VERSION__}")
     args = argsParser.parse_args()
 
     # parse source path
@@ -150,18 +177,7 @@ def main():
                 print(f'{"    " * (lvl - 1)}{title} {page}')
         sys.exit(0)
 
-    # parse toc path
-    if args.toc is None:
-        printErr('"--toc" is required if you want to modify toc info')
-        sys.exit(1)
-    tocPath = Path(args.toc)
-    if not tocPath.exists():
-        printErr('toc does not exist')
-        sys.exit(1)
-    if not tocPath.is_file():
-        printErr('toc is not a file')
-        sys.exit(1)
-
+    # parse dest path
     destPath = Path(args.dest) if args.dest is not None else (
         sourcePath.parent / f'{sourcePath.stem}_res.pdf')
     if destPath.exists():
@@ -173,13 +189,39 @@ def main():
                 'dest file exist, abort. try "-f" if you need to overwrite it.')
             sys.exit(1)
 
-    # source = fitz.open()
-    parser = TocParser()
-    with tocPath.open('r', encoding='UTF-8') as file:
-        if tocPath.suffix == ".json":
-            toc = json.loads(file.read(), object_hook=TocJsonHook, encoding="utf-8")
+    # parse toc path
+    tocPathStr: str = args.toc if args.toc is not None else ''
+    if args.toc is not None:
+        tocPath = Path(tocPathStr)
+        if not tocPath.exists():
+            printErr('toc does not exist')
+            sys.exit(1)
+        if not tocPath.is_file():
+            printErr('toc is not a file')
+            sys.exit(1)
+
+    # determine toc type
+    if args.type is not None:
+        tocType = args.type
+    elif args.toc is None:
+        # read from stdin, no file suffix available
+        # so we just assume the toc type is toc
+        tocType = 'toc'
+    else:
+        tocPath = Path(tocPathStr)
+        if tocPath.suffix == '.json':
+            tocType = 'json'
+        else:
+            tocType = 'toc'
+
+    # parse toc
+    with readToc(args.toc) as file:
+        if tocType == 'json':
+            toc = json.loads(
+                file.read(), object_hook=TocJsonHook, encoding="utf-8")
         else:
             toc = []
+            parser = TocParser()
             l: str
             for l in file:
                 term = parser(str(l))
