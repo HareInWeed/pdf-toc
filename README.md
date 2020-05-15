@@ -26,7 +26,7 @@ pip install git+https://github.com/HareInWeed/pdf-toc.git@master#egg=pdf-toc
 install a specific version
 
 ```bash
-pip install git+https://github.com/HareInWeed/pdf-toc.git@v1.1.0#egg=pdf-toc
+pip install git+https://github.com/HareInWeed/pdf-toc.git@v1.1.1#egg=pdf-toc
 ```
 
 ## Usage
