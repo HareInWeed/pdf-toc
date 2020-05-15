@@ -1,1 +1,2 @@
-from .main import main, __VERSION__
+from .main import main
+from .version import __VERSION__

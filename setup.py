@@ -1,5 +1,5 @@
 import setuptools
-from src import __VERSION__
+from pathlib import Path
 
 with open("README.md", "r", encoding='UTF-8') as fh:
     long_description = fh.read()
@@ -8,9 +8,20 @@ requirements = [
     'PyMuPDF'
 ]
 
+
+def get_version():
+    with (Path(__file__).parent / 'src' / 'version.py').open('r') as verInfo:
+        for line in verInfo:
+            if line.startswith('__VERSION__'):
+                delim = '"' if '"' in line else "'"
+                return line.split(delim)[1]
+        else:
+            raise RuntimeError("Unable to find version string.")
+
+
 setuptools.setup(
     name="pdf-toc",
-    version=__VERSION__,
+    version=get_version(),
     author="HareInWeed",
     description="a pdf ToC CLI tool",
     long_description=long_description,
