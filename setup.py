@@ -48,5 +48,5 @@ setuptools.setup(
         ],
     },
     zip_safe=False,
-    python_requires=">=3.2",
+    python_requires=">=3.6",
 )

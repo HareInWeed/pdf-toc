@@ -6,7 +6,7 @@ a CLI tool to easily extract / edit ToC(Table of Content, or bookmark) of pdf fi
 
 ## Requirements
 
-- python 3.2+
+- python >= 3.6
 - PyMuPDF
 
 ## Installation
@@ -61,19 +61,19 @@ optional arguments:
 show toc of file.pdf
 
 ```sh
-pdf-toc.py --show-toc file.pdf
+pdf-toc --show-toc file.pdf
 ```
 
 Generate a new file with content of file.pdf and toc in toc.txt
 
 ```sh
-pdf-toc.py -t toc.txt -d new-file.pdf file.pdf
+pdf-toc -t toc.txt -d new-file.pdf file.pdf
 ```
 
 Replace the toc of file.pdf with one in toc.txt
 
 ```sh
-pdf-toc.py -m -t toc.txt file.pdf
+pdf-toc -m -t toc.txt file.pdf
 ```
 
 ### ToC file
