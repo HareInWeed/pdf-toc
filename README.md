@@ -80,7 +80,7 @@ pdf-toc -m -t toc.txt file.pdf
 
 Two types of toc file are supported
 
-One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document/#Document.setToC) and [toc_json.md](/docs/toc-json.md) for detail
+One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document.html#Document.setToC) and [toc_json.md](/docs/toc-json.md) for detail
 
 The other is a special data format, which provides ease of modification and additional functionalities. Check out [toc.md](/docs/toc.md) for detail
 
