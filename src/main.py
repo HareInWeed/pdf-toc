@@ -218,7 +218,7 @@ def main():
     with readToc(args.toc) as file:
         if tocType == 'json':
             toc = json.loads(
-                file.read(), object_hook=TocJsonHook, encoding="utf-8")
+                file.read(), object_hook=TocJsonHook)
         else:
             toc = []
             parser = TocParser()
