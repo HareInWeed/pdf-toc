@@ -58,10 +58,10 @@ optional arguments:
 
 ### Examples
 
-show toc of file.pdf
+show toc of file.pdf in `toc` format
 
 ```sh
-pdf-toc --show-toc file.pdf
+pdf-toc --show-toc toc file.pdf
 ```
 
 Generate a new file with content of file.pdf and toc in toc.txt
