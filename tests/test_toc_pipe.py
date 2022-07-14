@@ -17,4 +17,4 @@ def test_show_pipe(shared_datadir):
 
     ToCPdfFile = fitz.open(ToCPdfFilePath)
     pdfFile = fitz.open(pdfFilePath)
-    assert ToCPdfFile.getToC() == pdfFile.getToC()
+    assert ToCPdfFile.get_toc() == pdfFile.get_toc()

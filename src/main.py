@@ -100,6 +100,7 @@ class TocParser(Parser):
                 r'offset\s*=\s*(\d+)': self.setOffset,
                 r'indent\s*=\s*(\d+)': self.setIndent
             }),
+            # r'^( *)(.+) (\d+)\s*(\(\s*(\d+(\.\d+)?)\s*,\s*(\d+(\.\d+)?)\s*\))?\s*$': self.newTerm,
             r'^( *)(.+) (\d+)\s*$': self.newTerm,
         })
         self.offset: int = 0
@@ -166,7 +167,7 @@ def main():
 
     # show file toc and exit
     if args.show is not None:
-        toc = source.getToC(False)
+        toc = source.get_toc(False)
         if args.show == 'json':
             print('[')
             print(',\n'.join(
@@ -227,7 +228,7 @@ def main():
                 term = parser(str(l))
                 if term is not None:
                     toc.append(term)
-    source.setToC(toc)
+    source.set_toc(toc)
     if args.mod:
         source.saveIncr()
     else:

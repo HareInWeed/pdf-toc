@@ -2,12 +2,13 @@
 
 a CLI tool to easily extract / edit ToC(Table of Content, or bookmark) of pdf file
 
-![demo](./docs/assets/demo.gif)
+![demo](docs/assets/demo.gif)
 
 ## Requirements
 
-- python >= 3.6
-- PyMuPDF
+- python >= 3.7
+  - for python 3.6 support, use `pdf-toc == 1.1.4`
+- PyMuPDF >= 1.19
 
 ## Installation
 
@@ -80,9 +81,9 @@ pdf-toc -m -t toc.txt file.pdf
 
 Two types of toc file are supported
 
-One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document.html#Document.set_toc) and [toc_json.md](/docs/toc-json.md) for detail
+One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document.html#Document.set_toc) and [toc_json.md](docs/toc-json.md) for detail
 
-The other is a special data format, which provides ease of modification and additional functionalities. Check out [toc.md](/docs/toc.md) for detail
+The other is a special data format, which provides ease of modification and additional functionalities. Check out [toc.md](docs/toc.md) for detail
 
 ## Licence
 

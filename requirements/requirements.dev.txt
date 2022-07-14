@@ -9,4 +9,5 @@ pytest
 pytest-datadir
 pytest-console-scripts
 
+build
 twine

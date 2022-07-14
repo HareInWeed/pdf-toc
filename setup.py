@@ -5,7 +5,7 @@ with open("README.md", "r", encoding='UTF-8') as fh:
     long_description = fh.read()
 
 requirements = [
-    'PyMuPDF < 1.19'
+    'PyMuPDF >= 1.19'
 ]
 
 
@@ -48,5 +48,5 @@ setuptools.setup(
         ],
     },
     zip_safe=False,
-    python_requires=">=3.6, <3.10",
+    python_requires=">=3.7",
 )
