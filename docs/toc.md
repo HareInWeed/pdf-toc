@@ -1,6 +1,6 @@
 # ToC
 
-ToC file consists of entries and commands. Each entry and commands occupies exactly one line in toc file. Each entry represents a bookmark. Commands, on the other hands, control how ToC file is interpreted and how bookmarks are generated.
+ToC file consists of entries and commands. Each entry and command occupies exactly one line in toc file. Each entry represents a bookmark. Commands, on the other hands, control how ToC file is interpreted and how bookmarks are generated.
 
 There is an example in [Lorem Ipsum_toc.txt](/tests/data/Lorem%20Ipsum_toc.txt)
 
@@ -30,7 +30,7 @@ Every command can only affect the entries after it.
 
 ### Offset
 
-Sometimes all the difference between the page numbers in your ToC data and the pdf file might happen to be the same value (which is quite common when you are dealing with an OCR file). That is where offset value come in handy. With an offset, you can increase or decrease the page number every entry for a certain value (offset), to make the ToC match the right page.
+Sometimes all the difference between the page numbers in your ToC data and the pdf file might happen to be the same value (which is quite common when you are dealing with scanned documents). That is where offset value come in handy. With an offset, you can increase or decrease the page number of every entry for a certain value (offset), to make the ToC match the right page.
 
 The initial offset is 0, so if you don't change the offset, page numbers of entries won't change.
 

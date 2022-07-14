@@ -71,7 +71,7 @@ class Parser(object):
                 else:
                     return h(*res.groups())
         else:
-            raise NoMatchException(f"invalid command: '{code}'")
+            raise NoMatchException(f"invalid command or entry: '{code}'")
 
     __call__ = parse
 
@@ -143,13 +143,13 @@ def main():
     argsParser.add_argument('-T', '--type', choices=formatList,
                             help=dedent('''\
                                 specify format of ToC file.
-                                leave it empty to let the tool determine the format,
+                                leave it empty to let the tool determine the format
                                 (from file suffix)
                             '''))
     argsParser.add_argument('-f', '--force', action='store_true',
                             help='overwrite dist file if it exist')
     argsParser.add_argument('-m', '--modify', action='store_true', dest='mod',
-                            help='modified the original file instead of create a new one')
+                            help='modified the original file instead of creating a new one')
     args = argsParser.parse_args()
 
     # parse source path

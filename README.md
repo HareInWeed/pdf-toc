@@ -25,8 +25,8 @@ pip install git+https://github.com/HareInWeed/pdf-toc.git@master#egg=pdf-toc
 
 install a specific version
 
-```bash
-pip install git+https://github.com/HareInWeed/pdf-toc.git@v1.1.1#egg=pdf-toc
+```sh
+pip install git+https://github.com/HareInWeed/pdf-toc.git@v1.1.4#egg=pdf-toc
 ```
 
 ## Usage
@@ -58,7 +58,7 @@ optional arguments:
 
 ### Examples
 
-show toc of file.pdf in `toc` format
+show the toc of file.pdf in `toc` format
 
 ```sh
 pdf-toc --show-toc toc file.pdf
@@ -80,7 +80,7 @@ pdf-toc -m -t toc.txt file.pdf
 
 Two types of toc file are supported
 
-One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document.html#Document.setToC) and [toc_json.md](/docs/toc-json.md) for detail
+One is json, which mostly follow the specification of PyMuPDF, but in json format. See [PyMuPDF docs](https://pymupdf.readthedocs.io/en/latest/document.html#Document.set_toc) and [toc_json.md](/docs/toc-json.md) for detail
 
 The other is a special data format, which provides ease of modification and additional functionalities. Check out [toc.md](/docs/toc.md) for detail
 
