@@ -1,4 +1,4 @@
-import fitz
+import pymupdf
 import re
 from textwrap import dedent
 
@@ -53,7 +53,7 @@ def test_write_toc(script_runner, shared_datadir):
     assert ret.stderr == ''
     assert (shared_datadir / "Lorem Ipsum_res.pdf").exists()
 
-    res = fitz.open(str(shared_datadir / "Lorem Ipsum_res.pdf"))
+    res = pymupdf.open(str(shared_datadir / "Lorem Ipsum_res.pdf"))
     resultToc = res.get_toc()
     assert resultToc == [toc[:3] for toc in expectedToc]
 
@@ -69,7 +69,7 @@ def test_write_toc_with_dest(script_runner, shared_datadir):
     assert ret.stderr == ''
     assert (shared_datadir / dest).exists()
 
-    res = fitz.open(str(shared_datadir / dest))
+    res = pymupdf.open(str(shared_datadir / dest))
     resultToc = res.get_toc()
     res.close()
     assert resultToc == [toc[:3] for toc in expectedToc]
@@ -93,7 +93,7 @@ def test_write_toc_with_dest(script_runner, shared_datadir):
     assert ret.stdout == ''
     assert ret.stderr == ''
 
-    res = fitz.open(str(shared_datadir / dest))
+    res = pymupdf.open(str(shared_datadir / dest))
     resultToc = res.get_toc()
     res.close()
     assert resultToc == [toc[:3] for toc in expectedToc]
@@ -110,6 +110,6 @@ def test_write_toc_json(script_runner, shared_datadir):
     assert ret.stderr == ''
     assert (shared_datadir / dest).exists()
 
-    res = fitz.open(str(shared_datadir / dest))
+    res = pymupdf.open(str(shared_datadir / dest))
     resultToc = res.get_toc()
     assert resultToc == [toc[:3] for toc in expectedJsonToc]
