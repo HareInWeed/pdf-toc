@@ -1,4 +1,4 @@
-import fitz
+import pymupdf
 import subprocess
 import io
 from contextlib import redirect_stdout, redirect_stderr
@@ -15,6 +15,6 @@ def test_show_pipe(shared_datadir):
     assert res.stdout == None
     assert res.stderr == None
 
-    ToCPdfFile = fitz.open(ToCPdfFilePath)
-    pdfFile = fitz.open(pdfFilePath)
+    ToCPdfFile = pymupdf.open(ToCPdfFilePath)
+    pdfFile = pymupdf.open(pdfFilePath)
     assert ToCPdfFile.get_toc() == pdfFile.get_toc()

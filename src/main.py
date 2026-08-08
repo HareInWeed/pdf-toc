@@ -3,7 +3,7 @@
 from .version import __VERSION__
 
 import re
-import fitz
+import pymupdf
 import argparse
 import sys
 import json
@@ -20,7 +20,7 @@ scriptFolder = Path(__file__).parent
 
 class TocJsonEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, fitz.Point):
+        if isinstance(obj, pymupdf.Point):
             return {
                 '__type__': 'Point',
                 'x': obj.x,
@@ -31,7 +31,7 @@ class TocJsonEncoder(json.JSONEncoder):
 
 def TocJsonHook(dct):
     if isinstance(dct, dict) and dct.get('__type__', '') == 'Point':
-        return fitz.Point(dct['x'], dct['y'])
+        return pymupdf.Point(dct['x'], dct['y'])
     return dct
 
 
@@ -163,7 +163,7 @@ def main():
         sys.exit(1)
 
     # source file
-    source = fitz.open(str(sourcePath))
+    source = pymupdf.open(str(sourcePath))
 
     # show file toc and exit
     if args.show is not None:
