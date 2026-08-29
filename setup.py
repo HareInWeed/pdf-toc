@@ -10,7 +10,7 @@ requirements = [
 
 
 def get_version():
-    with (Path(__file__).parent / 'src' / 'version.py').open('r') as verInfo:
+    with (Path(__file__).parent / 'src' / 'pdf_toc' / 'version.py').open('r') as verInfo:
         for line in verInfo:
             if line.startswith('__VERSION__'):
                 delim = '"' if '"' in line else "'"
@@ -39,12 +39,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    packages=setuptools.find_packages(
-        exclude=("docs", "tests")
-    ),
+    package_dir={"": "src"},
     entry_points={
         "console_scripts": [
-            "pdf-toc=src.main:main",
+            "pdf-toc=pdf_toc.main:main",
         ],
     },
     zip_safe=False,
